@@ -14,11 +14,10 @@ def cfg(event):
     "configure irc."
     c = Cfg()
     last(c)
-    print(event)
     if not event.args:
         event.reply(format(c, skip=["username", "realname"]))
         return
-    from triple.irc import Cfg
+    from irc import Cfg
     o = Object()
     parse(o, event.prs.otxt)
     if o.sets:

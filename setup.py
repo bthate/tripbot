@@ -6,7 +6,7 @@ __copyright__= "Public Domain"
 
 def mods():
     import os
-    return [x[:-3] for x in os.listdir("triple") if x.endswith(".py")]
+    return [x[:-3] for x in os.listdir("src") if x.endswith(".py")]
 
 def read():
     return open("README.rst", "r").read()

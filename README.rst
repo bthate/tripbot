@@ -24,9 +24,9 @@ you can download with pip3 and install globally:
 
  > sudo pip3 install tripbot --upgrade --force-reinstall
 
-in case of emergency, remove all triple packages from system:
+in case of emergency, remove all tripbot packages from system:
 
- : sudo rm -fR /usr/local/lib/python3.8/dist-packages/triple*
+ : sudo rm -fR /usr/local/lib/python3.8/dist-packages/tripbot*
 
 and try installing from onto a fresh system. You can also download the tarball
 and run/install from that, see https://pypi.org/project/tripbot/#files
@@ -48,7 +48,7 @@ server and channel run the cfg command:
 
 ::
 
- $ sudo triplectl cfg server=irc.freenode.net channel=\#dunkbots
+ $ sudo tripbot cfg server=irc.freenode.net channel=\#dunkbots
 nick=tripbot
 
 Restart the service:
@@ -80,21 +80,21 @@ to add an url use the rss command with an url:
 
 ::
 
- $ sudo triplectl rss https://github.com/bthate/tripbot/commits/master.atom
+ $ sudo tripbot rss https://github.com/bthate/tripbot/commits/master.atom
  ok 1
 
 run the rss command to see what urls are registered:
 
 ::
 
- $ sudo triplectl fnd rss
+ $ sudo tripbot fnd rss
  0 https://github.com/bthate/tripbot/commits/master.atom
 
 the ftc (fetch) command can be used to poll the added feeds:
 
 ::
 
- $ sudo triplectl ftc
+ $ sudo tripbot ftc
  fetched 20
 
 UDP
@@ -103,19 +103,19 @@ UDP
 TRIPBOT also has the possibility to serve as a UDP to IRC relay where you
 can send UDP packages to the bot and have txt displayed on the channel.
 
-use the tripleudp program to send text via the bot to the channel on the irc 
+use the `tripbot udp` command to send text via the bot to the channel on the irc 
 server:
 
 ::
 
- $ tail -f /var/log/syslog | tripleudp
+ $ tail -f /var/log/syslog | tripbot udp
 
 to send the tail output to the IRC channel
 
 you can use python3 code to send a UDP packet to the bot, it's unencrypted
 txt send to the bot and display on the joined channels.
 
-to send a udp packet to okbot in python3:
+to send a udp packet to tripbot in python3:
 
 ::
 
@@ -139,7 +139,7 @@ programming style like this:
 
  not:
 
- >>> from triple.obj import Object
+ >>> from obj import Object
  >>> o = Object()
  >>> o.set("key", "value")
  >>> o.key
@@ -147,7 +147,7 @@ programming style like this:
 
  but:
 
- >>> from triple.obj import Object, set
+ >>> from obj import Object, set
  >>> o = Object()
  >>> set(o, "key", "value")
  >>> o.key

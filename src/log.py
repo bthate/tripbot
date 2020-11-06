@@ -24,7 +24,7 @@ RLEVELS = {
           }
 
 datefmt = '%H:%M:%S'
-logdir = "/var/log/triple"
+logdir = "/var/log/tripbot"
 logformat = "%(asctime)-8s %(message)-72s"
 
 def level(name):
@@ -36,7 +36,7 @@ def level(name):
         for handler in root.handlers:
             root.removeHandler(handler)
     formatter = logging.Formatter(logformat, datefmt=datefmt)
-    #filehandler = logging.handlers.TimedRotatingFileHandler(os.path.join(logdir, "tripled.log"), 'midnight')
+    #filehandler = logging.handlers.TimedRotatingFileHandler(os.path.join(logdir, "tripbot.log"), 'midnight')
     #filehandler.setFormatter(formatter)
     ch = logging.StreamHandler()
     ch.setLevel(level)

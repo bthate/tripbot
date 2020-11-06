@@ -107,7 +107,7 @@ class Kernel(Loader, Handler):
             return
         for mn in spl(mns):
             try:
-                mod = self.load("triple.%s" % mn)
+                mod = self.load(mn)
                 self.scan(mod)
                 mod.init(self)
             except AttributeError:
@@ -158,7 +158,7 @@ def boot(name):
     k = get_kernel()
     cfg = parse_cli()
     update(k.cfg, cfg)
-    wd = obj.wd or k.cfg.wd or os.path.expanduser("~/.triple")
+    wd = obj.wd or k.cfg.wd or os.path.expanduser("~/.tripbot")
     obj.wd = k.cfg.wd = wd
     cdir(obj.wd)
     cdir(os.path.join(obj.wd, "store", ""))

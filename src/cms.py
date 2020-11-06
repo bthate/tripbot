@@ -54,5 +54,5 @@ def tsk(event):
 
 def ver(event):
     "show version (ver)"
-    from triple import krn
-    event.reply("TRIPLE %s" % krn.__version__)
+    import krn
+    event.reply("TRIPBOT %s" % krn.__version__)

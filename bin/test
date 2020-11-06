@@ -21,7 +21,8 @@ def main():
     open("rm -fR testdata")
     obj.wd = "testdata"
     k = boot("test")
-    k.walk("triple", ",".join(krn.mods))
+    import krn
+    scandir(os.path.dirname(krn.__file__), "")
     k.start()
     test_path = os.getcwd() + os.sep + "tests"
     if k.cfg.txt:

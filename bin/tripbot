@@ -36,15 +36,17 @@ EXAMPLES
         $ tripbot cmd
         cfg,cmd,dpl,edt,fnd,ftc,icfg,rem,rss,tsk,udp,ver
 
-        $ tripbot cfg server=irc.freenode.net channel=\#dunkbots nick=triple
-        channel=#dunkbots nick=triple port=6667 server=irc.freenode.net
+        $ tripbot cfg server=localhost channel=\#tripbot nick=tripbot
+
+        # tripbot cfg
+        channel=#tripbot nick=tripbot port=6667 server=localhost
 
         $ tripbot mods=irc,rss,udp
 
         $ tripbot -d
         $
         
-        # tripbot -s
+        $ tripbot -s
         >
 """
 
@@ -74,7 +76,7 @@ def daemon():
 
 def main():
     if root():
-        print("don't run triple as root")
+        print("don't run tripbot as root")
         return
     k = boot("tripbot")
     opts = k.cfg.opts

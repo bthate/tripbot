@@ -12,7 +12,7 @@ wd = ""
 
 class ENOFILENAME(Exception):
 
-    "provided argument is not a tripled filename"
+    "provided argument is not a tripbot filename"
 
 class O:
 

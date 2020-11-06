@@ -159,7 +159,7 @@ class Fetcher(Object):
     def run(self):
         "update all feeds"
         thrs = []
-        for fn, o in all("triple.rss.Rss"):
+        for fn, o in all("rss.Rss"):
             thrs.append(start(self.fetch, o))
         return thrs
 
@@ -265,7 +265,7 @@ def unescape(text):
 
 def useragent():
     "return useragent"
-    return 'Mozilla/5.0 (X11; Linux x86_64) TRIPLE +http://github.com/bthate/triple)'
+    return 'Mozilla/5.0 (X11; Linux x86_64) TRIPBOT +http://pypi.org/bthate/tripbot)'
 
 def rem(event):
     "remove a rss feed"
@@ -274,7 +274,7 @@ def rem(event):
     selector = {"rss": event.args[0]}
     nr = 0
     got = []
-    for fn, o in find("triple.rss.Rss", selector):
+    for fn, o in find("rss.Rss", selector):
         nr += 1
         o._deleted = True
         got.append(o)
@@ -287,7 +287,7 @@ def dpl(event):
     if len(event.args) < 2:
         return
     setter = {"display_list": event.args[1]}
-    for fn, o in lastmatch("triple.rss.Rss", {"rss": event.args[0]}):
+    for fn, o in lastmatch("rss.Rss", {"rss": event.args[0]}):
         edit(o, setter)
         save(o)
         event.reply("ok")
@@ -310,7 +310,7 @@ def rss(event):
     if not event.args:
         return
     url = event.args[0]
-    res = list(find("triple.rss.Rss", {"rss": url}))
+    res = list(find("rss.Rss", {"rss": url}))
     if res:
         return
     o = Rss()

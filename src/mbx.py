@@ -73,7 +73,7 @@ def to_date(date):
 def mbx(event):
     if not event.args:
         return
-    if os.path.exists(os.path.join(obj.wd, "store", "triple.mbx.Email")):
+    if os.path.exists(os.path.join(obj.wd, "store", "tripbot.mbx.Email")):
         event.reply("email is already scanned")
         return
     fn = os.path.expanduser(event.args[0])

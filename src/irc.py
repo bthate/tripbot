@@ -54,12 +54,12 @@ class Cfg(Cfg):
 
     def __init__(self):
         super().__init__()
-        self.channel = "#triple"
-        self.nick = "triple"
+        self.channel = "#tripbot"
+        self.nick = "tripbot"
         self.port = 6667
-        self.realname = "3 letter modules"
+        self.realname = "pure python3 IRC channel daemon"
         self.server = "localhost"
-        self.username = "triple"
+        self.username = "tripbot"
 
 class Event(Event):
 
@@ -404,7 +404,7 @@ class IRC(Loader, Handler):
     def NOTICE(self, event):
         "handle noticed"
         if event.txt.startswith("VERSION"):
-            txt = "\001VERSION %s %s - %s\001" % ("TRIPLE", krn.__version__, "3 letter modules")
+            txt = "\001VERSION %s %s - %s\001" % ("TRIPBOT", krn.__version__, "pure python3 IRC channel bot")
             self.command("NOTICE", event.channel, txt)
 
     def PRIVMSG(self, event):
@@ -468,7 +468,7 @@ class DCC(Handler):
         except ConnectionError:
             print("failed to connect to %s:%s" % (addr, port))
             return
-        s.send(bytes('Welcome to TRIPLE\n',"utf-8"))
+        s.send(bytes('Welcome to TRIPBOT\n',"utf-8"))
         s.setblocking(1)
         os.set_inheritable(s.fileno(), os.O_RDWR)
         self._sock = s
