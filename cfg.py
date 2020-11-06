@@ -4,7 +4,9 @@
 
 "config"
 
+from dbs import last
 from dft import Default
+from ofn import format
 
 class Cfg(Default):
 
@@ -12,12 +14,12 @@ class Cfg(Default):
 
 def cfg(event):
     "configure irc."
+    from irc import Cfg
     c = Cfg()
     last(c)
     if not event.args:
         event.reply(format(c, skip=["username", "realname"]))
         return
-    from irc import Cfg
     o = Object()
     parse(o, event.prs.otxt)
     if o.sets:

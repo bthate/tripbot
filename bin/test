@@ -1,12 +1,9 @@
 #!/usr/bin/python3
-# tripbot - pure python3 IRC channel bot
-#
-#
 
 import os, sys ; sys.path.insert(0, os.path.join(os.getcwd()))
 import time, unittest
-
 import krn, obj
+
 from krn import boot, execute, scandir
 from prs import parse_cli
 
@@ -18,13 +15,13 @@ def open(txt):
         pass
 
 def main():
-    open("rm -fR testdata")
-    obj.wd = "testdata"
+    pn = os.path.expanduser("~/.test")
+    open("rm -fR %s" % pn)
+    obj.wd = pn
     k = boot("test")
-    import krn
-    scandir(os.path.dirname(krn.__file__), "")
+    scandir(os.path.dirname(krn.__file__))
     k.start()
-    test_path = os.getcwd() + os.sep + "tests"
+    test_path = os.getcwd() + os.sep + "test"
     if k.cfg.txt:
         pat = "test_%s*" % k.cfg.txt
     else:

@@ -584,18 +584,4 @@ class Users(Object):
             save(user)
         return user
 
-#:
 users = Users()
-
-def cfg(event):
-    "configure irc."
-    if not event.args:
-        event.reply(format(c, skip=["username", "realname"]))
-        return
-    c = Cfg()
-    last(c)
-    o = Object()
-    parse(o, event.prs.otxt)
-    if o.sets:
-        update(c, o.sets)
-        save(c)
