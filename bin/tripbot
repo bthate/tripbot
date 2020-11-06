@@ -50,10 +50,8 @@ EXAMPLES
         >
 """
 
-__copyright__ = "Public Domain"
-
 from csl import Console
-from krn import boot, mods, os, scandir, sys
+from krn import boot, getpass
 from trm import execute, termreset
 from utl import privileges, root
 

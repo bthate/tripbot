@@ -7,6 +7,7 @@
 __version__ = 1
 
 import importlib, os, pkgutil, sys, time, threading
+import getpass
 import obj
 
 booted = False

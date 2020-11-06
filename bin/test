@@ -2,7 +2,7 @@
 
 import os, sys ; sys.path.insert(0, os.path.join(os.getcwd()))
 import time, unittest
-import krn, obj
+import krn, obj, rss
 
 from krn import boot, execute, scandir
 from prs import parse_cli
@@ -15,6 +15,7 @@ def open(txt):
         pass
 
 def main():
+    rss.debug = True
     pn = os.path.expanduser("~/.test")
     open("rm -fR %s" % pn)
     obj.wd = pn

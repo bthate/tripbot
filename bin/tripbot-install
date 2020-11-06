@@ -3,8 +3,6 @@
 #
 #
 
-__copyright__= "Public Domain"
-
 servicetxt="""[Unit]
 Description=TRIPBOT - pure python3 IRC channel bot
 After=network-online.target
