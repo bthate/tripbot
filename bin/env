@@ -1,0 +1,41 @@
+#!/usr/bin/python3
+# tripbot - pure python3 IRC channel bot
+#
+#
+
+import os
+
+old =  os.getcwd()
+
+def obopen(txt):
+    try:
+        for line in os.popen(txt).readlines():
+            print(line.rstrip())
+    except:
+        pass
+
+def main():
+    obopen("bin/clean")
+    try:
+        shutil.rmtree("build")
+    except:
+        pass
+    try:
+        shutil.rmtree("dist")
+    except:
+        pass
+    try:
+        shutil.rmtree("tripbot.egg-info")
+    except:
+        pass
+    for line in os.popen("python3 setup.py sdist").readlines():
+        print(line.strip())
+    #obopen("rm -fR ~/.cache/pip/")
+    obopen("cp -Ra dist/*  eggs")
+    obopen("cp -Ra docs/_templates html/_templates")
+    obopen("python3 -mvirtualenv -p python3 env")
+    obopen("env/bin/pip3 install tripbot -f eggs --upgrade --force-reinstall")
+
+if __name__ == "__main__":
+    main()
+    obopen("tar zcf env.tar.gz env")

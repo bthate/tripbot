@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+# TRIPBOT - pure python3 IRC channel bot
+#
+#
+
+__copyright__= "Public Domain"
+
+servicetxt="""[Unit]
+Description=TRIPBOT - pure python3 IRC channel bot
+After=network-online.target
+
+[Service]
+Group=tripbot
+User=tripbot
+StandardOutput=append:/var/log/tripbot/tripbot.log
+StandardError=append:/var/log/tripbot/tripbot.log
+ExecStart=/usr/local/bin/tripbot 
+
+[Install]
+WantedBy=multi-user.target
+"""
+
+def skipopen(txt, skip=["already"]):
+    txt += " 2>&1"
+    try:
+        for line in os.popen(txt).readlines():
+             pass
+    except Exception as ex:
+        for rej in skip:
+           if rej in str(ex):
+               return
+
+
+def writeservice():
+    p = "/etc/systemd/system/tripbot.service"
+    if not os.path.exists(p):
+        f = open(p, "w")
+        f.write(servicetxt)
+        f.close()
+
+def main():
+    skipopen("mkdir /var/lib/tripbot")
+    skipopen("mkdir /var/lib/tripbot/mods")
+    skipopen("mkdir /var/log/tripbot")
+    skipopen("touch /var/log/tripbot/tripbot.log")
+    skipopen("chown -R tripbot:tripbot /var/lib/tripbot")
+    skipopen("chown -R tripbot:tripbot /var/lib/tripbot/mods")
+    skipopen("chown -R tripbot:tripbot /var/log/tripbot")
+    skipopen("chmod -R 700 /var/lib/tripbot/")
+    skipopen("chmod -R 400 /var/lib/tripbot/mods/*.py")
+    skipopen("chmod -R 600/var/log/tripbot/tripbot.log")
+    skipopen("groupadd tripbot")
+    skipopen("useradd tripbot -g tripbot -d /var/lib/tripbot")
+    writeservice()

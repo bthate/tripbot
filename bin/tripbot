@@ -1,0 +1,97 @@
+#!/usr/bin/python3
+# tripbot - pure python3 IRC channel bot
+#
+# 
+
+"""TRIPBOT(1)                        User Commands                         TRIPBOT(1)
+
+NAME
+        tripbot - pure python3 IRC channel bot
+
+SYNOPSIS
+        TRIPBOT is a pure python3 IRC channel bot that you can use to display 
+        RSS feeds, act as a UDP to IRC gateway, program your own commands for
+        it, have it log objects on disk and search them and scan emails for
+        correspondence analysis. TRIPBOT uses a JSON in file database with a
+        versioned readonly storage. It reconstructs objects based on type 
+        information in the path and uses a "dump OOP and use OP" programming
+        library where the methods are factored out into functions that use the
+        object as the first argument. 
+
+        TRIPBOT is placed in the Public Domain and has no COPYRIGHT and no LICENSE.
+
+USAGE
+        tripbot <cmd> [mods=mod1,mod2] [-d] [-h] [-s] [-v]
+
+OPTIONS
+        -h              print this message
+        -d              daemonized mode
+        -s              start a shell
+        -v              be verbose
+
+        mods= let's you starts modules on boot, possbile modules to
+        load are: irc,rss,udp
+
+EXAMPLES
+        $ tripbot cmd
+        cfg,cmd,dpl,edt,fnd,ftc,icfg,rem,rss,tsk,udp,ver
+
+        $ tripbot cfg server=irc.freenode.net channel=\#dunkbots nick=triple
+        channel=#dunkbots nick=triple port=6667 server=irc.freenode.net
+
+        $ tripbot mods=irc,rss,udp
+
+        $ tripbot -d
+        $
+        
+        # tripbot -s
+        >
+"""
+
+__copyright__ = "Public Domain"
+
+from csl import Console
+from krn import boot, mods, os, scandir, sys
+from trm import execute, termreset
+from utl import privileges, root
+
+import getpass
+
+def daemon():
+    "switch to background"
+    pid = os.fork()
+    if pid != 0:
+        termreset()
+        os._exit(0)
+    os.setsid()
+    os.umask(0)
+    si = open("/dev/null", 'r')
+    so = open("/dev/null", 'a+')
+    se = open("/dev/null", 'a+')
+    os.dup2(si.fileno(), sys.stdin.fileno())
+    os.dup2(so.fileno(), sys.stdout.fileno())
+    os.dup2(se.fileno(), sys.stderr.fileno())
+
+def main():
+    if root():
+        print("don't run triple as root")
+        return
+    k = boot("tripbot")
+    opts = k.cfg.opts
+    if "h" in opts:
+        return print(__doc__)
+    import krn
+    scandir(os.path.dirname(krn.__file__, "")
+    if k.cfg.cmd:
+        return k.cmd(k.cfg.otxt)
+    if "d" in k.cfg.opts:
+        daemon()
+    k.start()
+    k.init(k.cfg.mods)
+    if "d" not in opts and "s" in opts:
+        c = Console()
+        c.start()
+        k.wait()    
+
+execute(main)
+os._exit(0)

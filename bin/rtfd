@@ -1,0 +1,10 @@
+#!/bin/bash
+# tripbot - pure python3 IRC channel bot
+#
+#
+
+bin/env
+env/bin/python3 env/bin/pip3 install -f eggs -r docs/requirements.txt --upgrade --force-reinstall
+env/bin/python3 env/bin/sphinx-build -a docs html
+#env/bin/python3 env/bin/sphinx-build -b pdf docs tripled.pdf
+#env/bin/python3 env/bin/sphinx-build -b latex docs tripled.pdf

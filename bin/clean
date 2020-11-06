@@ -1,0 +1,11 @@
+# tripbot - pure python3 IRC channel bot
+#
+#
+
+cp docs/index.rst .
+#cp docs/source.rst .
+rm -fR html docs/triple*.rst docs/class.rst/ docs/*~ tests/*~ tests/__pycache__ bin/*~ triple/*~ triple/__pycache__ env env.tar.gz tripbot.egg-info src/tripbot.egg-info dist build *~ __pycache__
+mv index.rst docs
+chmod 644 docs/index.rst
+chown bart:bart docs/index.rst
+#mv source.rst docs

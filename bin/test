@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+# tripbot - pure python3 IRC channel bot
+#
+#
+
+import os, sys ; sys.path.insert(0, os.path.join(os.getcwd()))
+import time, unittest
+
+import krn, obj
+from krn import boot, execute, scandir
+from prs import parse_cli
+
+def open(txt):
+    try:
+        for line in os.popen(txt).readlines():
+            print(line.rstrip())
+    except:
+        pass
+
+def main():
+    open("rm -fR testdata")
+    obj.wd = "testdata"
+    k = boot("test")
+    k.walk("triple", ",".join(krn.mods))
+    k.start()
+    test_path = os.getcwd() + os.sep + "tests"
+    if k.cfg.txt:
+        pat = "test_%s*" % k.cfg.txt
+    else:
+        pat = "test*"
+    suite = unittest.loader.TestLoader().discover(test_path, pattern=pat)
+    unittest.TextTestRunner(verbosity=3).run(suite)
+    k.wait()
+   
+execute(main)
+os._exit(0)
