@@ -6,7 +6,7 @@ from setuptools import setup
 
 def mods():
     import os
-    return [x.split(os.sep)[-1][:-3] for x in os.listdir(os.getcwd()) if x.endswith(".py")]
+    return [x.split(os.sep)[-1][:-3] for x in os.listdir(os.getcwd()) if x.endswith(".py") and not x == "setup.py"]
 
 def read():
     return open("README.rst", "r").read()
