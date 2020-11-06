@@ -1,12 +1,12 @@
-# TRIPBOT - 24/7 channel daemon
+# TRIPBOT - pure python3 IRC channel bot
 #
 #
 
-__copyright__= "Public Domain"
+from setuptools import setup
 
 def mods():
     import os
-    return [x[:-3] for x in os.listdir("src") if x.endswith(".py")]
+    return [x.split(os.sep)[-1][:-3] for x in os.listdir(os.getcwd()) if x.endswith(".py")]
 
 def read():
     return open("README.rst", "r").read()
@@ -17,16 +17,12 @@ setup(
     url='https://github.com/bthate/tripbot',
     author='Bart Thate',
     author_email='bthate@dds.nl', 
-    description="24/7 channel daemon",
+    description="pure python3 IRC channel bot",
     long_description=read(),
-    license='Public Domain',
     zip_safe=False,
-    package_dir=["", "src"],
-    data_files=['', mods()]
-    scripts=["bin/tripbot", "bin/tripbotctl", "bin/tripbotd", "bin/tripbotudp"],
-    cmdclass={'install': Install},
+    py_modules=mods(),
+    scripts=["bin/tripbot"],
     classifiers=['Development Status :: 3 - Alpha',
-                 'License :: OSI Approved :: MIT License',
                  'Operating System :: Unix',
                  'Programming Language :: Python',
                  'Topic :: Utilities'

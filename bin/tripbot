@@ -83,7 +83,7 @@ def main():
     if "h" in opts:
         return print(__doc__)
     import krn
-    scandir(os.path.dirname(krn.__file__, "")
+    scandir(os.path.dirname(krn.__file__))
     if k.cfg.cmd:
         return k.cmd(k.cfg.otxt)
     if "d" in k.cfg.opts:

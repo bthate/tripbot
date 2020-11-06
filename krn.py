@@ -11,7 +11,7 @@ import obj
 
 booted = False
 starttime = time.time()
-mods = [x[:-3] for x in os.listdir(os.path.dirname(obj.__file__)) 
+mods = [x.split(os.sep)[-1][:-3] for x in os.listdir(os.path.dirname(obj.__file__)) 
         if not x.startswith("__") and x.endswith(".py")]
 
 from bus import bus
@@ -164,7 +164,7 @@ def boot(name):
     cdir(os.path.join(obj.wd, "store", ""))
     sys.path.insert(0, k.cfg.wd)
     import krn
-    scandir(os.path.dirname(krn.__file__, "")
+    scandir(os.path.dirname(krn.__file__))
     return k
 
 def cmd(txt):
@@ -192,11 +192,12 @@ def get_kernel():
         return kernels[0]
     return Kernel()
 
-def scandir(path, name):
+def scandir(path):
     "scan a modules directory"
     k = get_kernel()
     cdir(path + os.sep + "")
-    for mn in [x[:-3]) for x in os.listdir(path)
+    for mn in [x[:-3] for x in os.listdir(path)
                        if x and x.endswith(".py")
-                       and not x.startswith("__")]:
+                       and not x.startswith("__")
+                       and not x == "setup.py"]:
         k.scan(k.load(mn))
